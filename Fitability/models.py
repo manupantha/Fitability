@@ -3,6 +3,7 @@ from django.db import models
 
 # Create your models here.
 class User(models.Model):
+    user_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     dob = models.DateField(blank=False)
@@ -32,7 +33,7 @@ class WorkOut(models.Model):
 
 
 class DayEntry(models.Model):
-    id = models.ForeignKey(User, on_delete=models.CASCADE)
+    entry_id=models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
     work_out_routine = models.ForeignKey(WorkOutRoutine, on_delete=models.CASCADE)
     work_out = models.ForeignKey(WorkOut, on_delete=models.CASCADE)
