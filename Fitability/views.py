@@ -68,11 +68,18 @@ class DayEntryList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         queryset = DayEntry.objects.all()
-        user = self.request.query_params.get('user')
+        userid = self.request.query_params.get('userid')
         workoutroutine=self.request.query_params.get('workoutroutine')
         workout=self.request.query_params.get('workout')
-        if user is not None:
-            queryset = queryset.filter(entry_id=user,work_out_routine=workoutroutine,work_out=workout)
+        if userid is not None:
+            queryset = queryset.filter(entry_id=userid)
+
+        if workoutroutine is not None:
+            queryset=queryset.filter(work_out_routine=workoutroutine)
+
+        if workout is not None:
+            queryset=queryset.filter(work_out=workout)
+
         return queryset
 
 
